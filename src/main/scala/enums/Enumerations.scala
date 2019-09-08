@@ -12,6 +12,7 @@ def colorNumber(c: Color) = c match {
   case Color.Red => 1
   case Color.Green => 2
   case Color.Blue => 3
+  case Color.Black => 100
 }
 
 def colorOrdinal(c: Color) = c.ordinal
@@ -29,7 +30,22 @@ enum ColorJ extends java.lang.Enum[ColorJ] {
   case Red, Green, Blue
 }
 
+// ADT
+
+enum Maybe[+A] {
+  case Nothing
+  case Just(value: A)
+}
+
+def printMaybe(m: Maybe[_]): String = m match {
+  case Maybe.Nothing => "Nothing"
+  case Maybe.Just(v) => s"Just ${v.toString}"
+}
+
 def main(args: Array[String]): Unit = {
   println("Red: " + Color.Red.ordinal) // -> 0 最初の要素が 0
   println("Green: " + Color.Green.ordinal) // -> 1
+
+  val i: Maybe[Int] = Maybe.Just(42)
+  println(printMaybe(i))
 }
